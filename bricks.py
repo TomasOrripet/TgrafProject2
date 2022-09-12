@@ -4,19 +4,6 @@ from OpenGL.GLU import *
 class bricks():
 
     def __init__(self, rows, Xsize, Ysize):
-        self.__rows = rows
-        self.__displayX = Xsize
-        self.__displayY = Ysize 
-        self.__sizeX = 18 
-        self.__sizeY = 10
-        self.__cols = Xsize//20
-        self.__posX = 20
-        self.__bricklist = []
-
-        for i in range(self.__rows):
-            for j in range(self.__cols):
-                print(F"row: {i}\ncols: {j}")
-        
         pass
 
     def display(self):

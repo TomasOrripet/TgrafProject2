@@ -51,5 +51,8 @@ class Ball:
 
         
     
-    def check_paddle(self):
+    def check_paddle(self, paddleX):
+        if self.y_pos < 60:
+            if self.x_pos < paddleX +80 and self.x_pos > paddleX -80:
+                self.velocity[1] = -self.velocity[1]
         pass
