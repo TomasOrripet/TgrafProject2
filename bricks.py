@@ -19,4 +19,7 @@ class bricks():
         glVertex3f(self.__posX - self.__sizeX/2, self.__posY + self.__sizeY/2,0)   
         glEnd()
 
+    def x_ypos(self):
+        return self.__posX , self.__posY
+
 

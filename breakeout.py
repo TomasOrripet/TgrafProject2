@@ -35,9 +35,10 @@ class Breakout:
         for i in range(3):
             posY = self.__displayY - (sizeY * i) - 10
             for j in range (15):
-                posX = sizeX * j + 20
-                self.__brickList.append(bricks(posX, posY))
-                
+                if j % 2 == 0:
+                    posX = sizeX * j + 20
+                    self.__brickList.append(bricks(posX, posY))
+                    
         
 
     def update(self):
@@ -47,8 +48,13 @@ class Breakout:
         self.__Ball.check_if_ball_hits_wall()
         
         self.__Ball.check_paddle(self.__Paddle.xpos())
+        #print(F"total bricks: {len(self.__brickList)}\n")
+        #self.__brickList.
+        self.__brickList = self.__Ball.check_bricks(self.__brickList)
 
-        #self.__Ball.check_bricks()
+        #print(F"total bricks after: {len(self.__brickList)}\n")
+
+        
         
         pass
             

@@ -12,7 +12,7 @@ class Ball:
     def __init__(self,velocity,):
         self.amount_of_triangles = 20
         self.radius = 10
-        self.x_pos = 380
+        self.x_pos = 70#380
         self.y_pos = 100
         self.velocity = [4,8]
 
@@ -57,10 +57,136 @@ class Ball:
                 self.velocity[1] = -self.velocity[1]
         pass
 
-    #def check_bricks(self, bricks):
-    #    if self.y_pos < 700:
-    #        for brick in bricks:
+    def check_bricks(self, bricks):
+        if self.y_pos > 720:
+            for brick in bricks:
+                x,y = brick.x_ypos()
+            
+                #top top
+                #botom botm
+                #left left
+                #right right
+
+                ballright = self.x_pos +10
+                ballleft = self.x_pos - 10
+                brickright = x+19
+                brickleft = x-19
+                ballTop = self.y_pos + 10
+                ballbottom = self.y_pos -10
+                brickBottom = y - 9
+                bricktopp = self.y_pos + 9
+                
+                if self.velocity[1]>0:
+                #topBall bottom brick collison
+                    
+                    
+                    
+                    if ballTop > brickBottom:
+
+                        if self.velocity[0]>0:
+                            #rightball leftbrick
+                            if ballright > brickleft and ballright < brickright:
+                                inx = (ballright - brickleft)
+                                iny = ballTop - brickBottom
+                                if (iny <= inx):
+                                    self.velocity[1] = -self.velocity[1]
+                                    bricks.remove(brick)
+                                    print("down")
+                                else:
+                                    self.velocity[0] = -self.velocity[0]
+                                    bricks.remove(brick)
+                                    print("left")
+                                print("ball top -> right")
+                                print(F"in x: {inx}")
+                                print(F"in y: {iny}")
+                                
+                        
+                        else:
+                            #leftball rightbrick
+                            if ballleft < brickright and ballleft > brickleft:
+                                inx = (brickright - ballleft)
+                                iny = ballTop - brickBottom
+                                if (iny <= inx):
+                                    self.velocity[1] = -self.velocity[1]
+                                    bricks.remove(brick)
+                                    print("down")
+                                else:
+                                    print("right")
+                                    self.velocity[0] = -self.velocity[0]
+                                    bricks.remove(brick)
+                                print("ball top -> left")
+                                print(F"in x: {inx}")
+                                print(F"in y: {iny}")
+                                
+                else:
+                    if ballbottom < bricktopp and ballbottom > brickBottom :
+
+                        if self.velocity[0]>0:
+                            #rightball leftbrick
+                            if ballright > brickleft and ballright < brickright:
+                                inx = ballright - brickleft
+                                iny = bricktopp - ballbottom
+                                if iny <= inx:
+                                    self.velocity[1] = -self.velocity[1]
+                                    print("down")
+                                    bricks.remove(brick)
+                                else:
+                                    self.velocity[0] = -self.velocity[0]
+                                    print("left")
+                                    bricks.remove(brick)
+                                print("ball bottom -> right")
+                                print(F"in x: {inx}")
+                                print(F"in y: {iny}")
+                                
+
+                        else:
+                            #leftball rightbrick
+                            if ballleft < brickright and ballleft > brickleft:
+                                inx = (brickright - ballleft)
+                                iny = bricktopp - ballbottom
+                                if (iny <= inx):
+                                    self.velocity[1] = -self.velocity[1]
+                                    print("down")
+                                    bricks.remove(brick)
+                                else:
+                                    print("right")
+                                    self.velocity[0] = -self.velocity[0]
+                                    bricks.remove(brick)
+                                print("ball bottom -> left")
+                                print(F"in x: {inx}")
+                                print(F"in y: {iny}")
+
+                            
+
+
+
+                    
+                 
+                    
+
+                        
+                        
+                        
+
+                        #print(F"X: {x}\nY: {y}\nSX: {self.x_pos}\nSY: {self.y_pos}")
+                        #self.velocity[1] = - self.velocity[1]
+
+
+                #if (self.y_pos + 10 < y and self.y_pos -10 < y + 18) and (self.x_pos > x and self.x_pos < x+38 ):
+                #    print(F"X: {x}\nY: {y}\nSX: {self.x_pos}\nSY: {self.y_pos}")
+                #    self.velocity[1] = - self.velocity[1]
+
+            
+                                                      
+                        
+
+
+
+
+                    
+        return bricks
+
 
 
         
-        #pass
+        pass
