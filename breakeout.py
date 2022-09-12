@@ -15,8 +15,8 @@ from ball import Ball
 class Breakout:
         
     def __init__(self):
-        self.__displayX = 800
-        self.__displayY = 600
+        self.__displayX = 600
+        self.__displayY = 800
         pygame.display.init()
         pygame.display.set_mode((self.__displayX, self.__displayY), DOUBLEBUF|OPENGL) #800 pixels wide and 600 pixels high
         self.__Paddle = paddle(self.__displayX, self.__displayY)
