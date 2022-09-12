@@ -9,13 +9,12 @@ import math
 
 class Ball:
 
-    def __init__(self,velocity, bricks):
+    def __init__(self,velocity,):
         self.amount_of_triangles = 20
         self.radius = 10
         self.x_pos = 380
         self.y_pos = 100
         self.velocity = [4,8]
-        self.bricks = bricks
 
 
 
@@ -58,3 +57,10 @@ class Ball:
                 self.velocity[1] = -self.velocity[1]
         pass
 
+    #def check_bricks(self, bricks):
+    #    if self.y_pos < 700:
+    #        for brick in bricks:
+
+
+        
+        #pass

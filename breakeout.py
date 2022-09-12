@@ -17,16 +17,28 @@ class Breakout:
     def __init__(self):
         self.__displayX = 600
         self.__displayY = 800
+        self.__brickList = []
         pygame.display.init()
         pygame.display.set_mode((self.__displayX, self.__displayY), DOUBLEBUF|OPENGL) #800 pixels wide and 600 pixels high
         
         self.__Paddle = paddle(self.__displayX)
-        self.__Bricks = bricks(2, self.__displayX, self.__displayY)
+        self.createBricks()
         
         glClearColor(0.0, 0.0, 0.0, 1.0)
         
-        self.__Ball = Ball([4,8],self.__Bricks)
+        self.__Ball = Ball([4,8])
         self.clock = pygame.time.Clock()
+
+    def createBricks(self):
+        sizeY = 20
+        sizeX = 40
+        for i in range(3):
+            posY = self.__displayY - (sizeY * i) - 10
+            for j in range (15):
+                posX = sizeX * j + 20
+                self.__brickList.append(bricks(posX, posY))
+                
+        
 
     def update(self):
         self.__Paddle.update()
@@ -35,6 +47,8 @@ class Breakout:
         self.__Ball.check_if_ball_hits_wall()
         
         self.__Ball.check_paddle(self.__Paddle.xpos())
+
+        #self.__Ball.check_bricks()
         
         pass
             
@@ -55,8 +69,11 @@ class Breakout:
         
         #the paddle
         self.__Paddle.display()
-        self.__Bricks.display()
+        #self.__Bricks.display()
         self.__Ball.display()
+        for brick in self.__brickList:
+            brick.display()
+
         
 
 
