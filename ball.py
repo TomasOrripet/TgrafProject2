@@ -9,12 +9,12 @@ import math
 
 class Ball:
 
-    def __init__(self):
+    def __init__(self,velocity):
         self.amount_of_triangles = 20
         self.radius = 10
         self.x_pos = 380
         self.y_pos = 100
-        self.velocity = [4,8] #einhverjar random tölur
+        self.velocity = [4,8]
 
 
 
@@ -33,22 +33,17 @@ class Ball:
         glEnd()
 
     def update(self):
-        self.x_pos += 4
-        self.y_pos += 4
+        self.x_pos += self.velocity[0]
+        self.y_pos += self.velocity[1]
 
 
-    def ball_check(self):
-        #we check if the ball is bouncing against any of the 4 walls
-        if self.x_pos > 780:
-            self.x_pos -= self.x_pos
-
+    def check_if_ball_hits_wall(self):
+        
+        if self.x_pos >= 790:
+            self.velocity[0]  = - self.velocity[0]
         if self.x_pos <= 0:
-            self.x_pos -= self.x_pos
-        if self.y_pos >= 580:
-            self.y_pos -= self.y_pos
+            self.velocity[0]  = - self.velocity[0]
+        if self.y_pos >= 590:
+            self.velocity[1]  = - self.velocity[1]
         if self.y_pos <= 0:
-            self.y_pos -= self.y_pos
-
-
-
-
+            self.velocity[1]  = - self.velocity[1]

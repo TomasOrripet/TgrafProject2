@@ -6,7 +6,7 @@ import random
 from random import *
 from paddle import paddle
 from bricks import bricks
-
+from ball import Ball
 
 
 
@@ -15,17 +15,21 @@ from bricks import bricks
 class Breakout:
         
     def __init__(self):
-        self.__displayX = 600
-        self.__displayY = 800
+        self.__displayX = 800
+        self.__displayY = 600
         pygame.display.init()
         pygame.display.set_mode((self.__displayX, self.__displayY), DOUBLEBUF|OPENGL) #800 pixels wide and 600 pixels high
         self.__Paddle = paddle(self.__displayX, self.__displayY)
         self.__Bricks = bricks(2, self.__displayX, self.__displayY)
         glClearColor(0.0, 0.0, 0.0, 1.0)
-
+        self.__Ball = Ball([4,8])
+        self.clock = pygame.time.Clock()
 
     def update(self):
         self.__Paddle.update()
+
+        self.__Ball.update()
+        self.__Ball.check_if_ball_hits_wall()
         pass
             
 
@@ -46,14 +50,17 @@ class Breakout:
         #the paddle
         self.__Paddle.display()
         self.__Bricks.display()
-
+        self.__Ball.display()
         
 
 
         pygame.display.flip()
 
+
+
     def game_loop(self):
         for event in pygame.event.get():
+                
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
@@ -74,7 +81,7 @@ class Breakout:
                     if event.key == K_RIGHT:
                         self.__Paddle.rStop()
                         pass
-                
+        self.clock.tick(60)
         self.update()
         self.display()
 
