@@ -51,12 +51,10 @@ class Ball:
 
         
     
-    def check_paddle(self):
-        n_x = (self.__posX + self.__sizeX) -  (self.__posX + self.__sizeX), 
-        n_y =(self.__posY + self.__sizeY) - (self.__posX + self.__sizeX, self.__posY - self.__sizeY)
-        N = [n_x,n_y]
 
-        self.velocity[0] 
-
-        
+    def check_paddle(self, paddleX):
+        if self.y_pos < 60:
+            if self.x_pos < paddleX +80 and self.x_pos > paddleX -80:
+                self.velocity[1] = -self.velocity[1]
         pass
+

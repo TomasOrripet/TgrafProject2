@@ -34,6 +34,7 @@ class Breakout:
         self.__Ball.update()
         self.__Ball.check_if_ball_hits_wall()
         
+        self.__Ball.check_paddle(self.__Paddle.xpos())
         
         pass
             

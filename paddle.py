@@ -23,11 +23,16 @@ class paddle():
 
     def display(self):
         glBegin(GL_QUADS)
+
         glVertex3f(self.__posX + self.__sizeX, self.__posY + self.__sizeY,0)
         glVertex3f(self.__posX + self.__sizeX, self.__posY - self.__sizeY,0)
         glVertex3f(self.__posX - self.__sizeX, self.__posY - self.__sizeY,0)
         glVertex3f(self.__posX - self.__sizeX, self.__posY + self.__sizeY,0)
+
         glEnd()
+
+    def xpos(self):
+        return self.__posX
 
     def left(self):
         self.__goLeft = True
