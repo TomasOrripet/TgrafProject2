@@ -39,20 +39,22 @@ class Ball:
 
 
     def check_if_ball_hits_wall(self):
-        if self.x_pos >= 790:
+        if self.x_pos >= 590:
             self.velocity[0]  = - self.velocity[0]
         if self.x_pos <= 0:
             self.velocity[0]  = - self.velocity[0]
-        if self.y_pos >= 590:
+        if self.y_pos >= 790:
             self.velocity[1]  = - self.velocity[1]
         if self.y_pos <= 0:
             #self.velocity[1]  = - self.velocity[1]
-            print("game over")
+            pass
 
         
     
+
     def check_paddle(self, paddleX):
         if self.y_pos < 60:
             if self.x_pos < paddleX +80 and self.x_pos > paddleX -80:
                 self.velocity[1] = -self.velocity[1]
         pass
+
