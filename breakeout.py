@@ -5,6 +5,7 @@ from OpenGL.GLU import *
 import random
 from random import *
 from paddle import paddle
+from bricks import bricks
 
 
 
@@ -13,16 +14,18 @@ from paddle import paddle
 
 class Breakout:
         
-    def init_game(self):
-        
+    def __init__(self):
+        self.__displayX = 600
+        self.__displayY = 800
         pygame.display.init()
-        pygame.display.set_mode((800, 600), DOUBLEBUF|OPENGL) #800 pixels wide and 600 pixels high
-        self.__Paddle = paddle()
-        
+        pygame.display.set_mode((self.__displayX, self.__displayY), DOUBLEBUF|OPENGL) #800 pixels wide and 600 pixels high
+        self.__Paddle = paddle(self.__displayX, self.__displayY)
+        self.__Bricks = bricks(2, self.__displayX, self.__displayY)
         glClearColor(0.0, 0.0, 0.0, 1.0)
 
 
     def update(self):
+        self.__Paddle.update()
         pass
             
 
@@ -35,11 +38,14 @@ class Breakout:
         glLoadIdentity()
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
-        glViewport(0, 0, 800, 600)
-        gluOrtho2D(0, 800, 0, 600)
+        glViewport(0, 0, self.__displayX, self.__displayY)
+        gluOrtho2D(0, self.__displayX, 0, self.__displayY)
+        
 
+        
         #the paddle
         self.__Paddle.display()
+        self.__Bricks.display()
 
         
 
@@ -64,16 +70,16 @@ class Breakout:
                         self.__Paddle.right()
                 elif event.type == pygame.KEYUP:
                     if event.key == K_LEFT:
-                        pass
+                        self.__Paddle.lStop()
                     if event.key == K_RIGHT:
+                        self.__Paddle.rStop()
                         pass
                 
-        #update()
+        self.update()
         self.display()
 
 if __name__ == "__main__":
     breakout = Breakout()
-    breakout.init_game()
     while True:
         breakout.game_loop()
 
