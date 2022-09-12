@@ -1,4 +1,3 @@
-from operator import truediv
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
@@ -6,9 +5,11 @@ from OpenGL.GLU import *
 going_right = False
 going_left = False
 
-class paddle:
+class paddle():
 
-    def __init__(self, Xsize, Ysize) -> None:
+
+
+    def __init__(self, Xsize) -> None:
         self.__posX = 280
         self.__posY = 50
         self.__sizeX = 80
@@ -16,7 +17,9 @@ class paddle:
         self.__goLeft = False
         self.__goRight = False
         self.__xMax = Xsize - self.__sizeX
-        self.__xMin = 0
+        self.__xMin = 80
+        self.__speed = 2
+        self.__velocity = 1
 
     def display(self):
         glBegin(GL_QUADS)
@@ -39,8 +42,20 @@ class paddle:
         self.__goRight = False
 
     def update(self):
+        self.__velocity *= 1.1
+
+        if self.__velocity > 4:
+            self.__velocity = 4
+
+        if((self.__goLeft and self.__goRight)or(not self.__goLeft and not self.__goRight)):
+            self.__velocity = 1        
         if self.__goLeft:
-            self.__posX -= 0.1
+            self.__posX -= self.__speed * self.__velocity
         if self.__goRight:
-            self.__posX += 0.1
+            self.__posX += self.__speed * self.__velocity
+
+        if self.__posX > self.__xMax:
+            self.__posX = self.__xMax
+        if self.__posX < self.__xMin:
+            self.__posX = self.__xMin
 
