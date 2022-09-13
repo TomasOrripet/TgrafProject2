@@ -17,6 +17,7 @@ class Breakout:
     def __init__(self):
         self.__displayX = 600
         self.__displayY = 800
+        self.__level = 1
         self.__brickList = []
         pygame.display.init()
         pygame.display.set_mode((self.__displayX, self.__displayY), DOUBLEBUF|OPENGL) #800 pixels wide and 600 pixels high
@@ -26,18 +27,18 @@ class Breakout:
         
         glClearColor(0.0, 0.0, 0.0, 1.0)
         
-        self.__Ball = Ball([4,8])
+        self.__Ball = Ball()
         self.clock = pygame.time.Clock()
 
     def createBricks(self):
         sizeY = 20
         sizeX = 40
-        for i in range(3):
+        for i in range(self.__level):
             posY = self.__displayY - (sizeY * i) - 10
             for j in range (15):
-                posX = sizeX * j + 20
-                self.__brickList.append(bricks(posX, posY))
-                
+                    posX = sizeX * j + 20
+                    self.__brickList.append(bricks(posX, posY))
+                    
         
 
     def update(self):
@@ -47,8 +48,17 @@ class Breakout:
         self.__Ball.check_if_ball_hits_wall()
         
         self.__Ball.check_paddle(self.__Paddle.xpos())
+        
 
-        #self.__Ball.check_bricks()
+        self.__brickList = self.__Ball.check_bricks(self.__brickList)
+        
+        if (len(self.__brickList) == 0):
+            self.__level += 1
+            self.__Ball = Ball()
+            self.createBricks()
+
+
+        
         
         pass
             
@@ -98,6 +108,11 @@ class Breakout:
                         self.__Paddle.left()
                     elif event.key == K_RIGHT:
                         self.__Paddle.right()
+                    elif event.key == K_r:
+                        self.__level = 1
+                        self.__Ball = Ball()
+                        self.__brickList = []
+                        self.createBricks()
                 elif event.type == pygame.KEYUP:
                     if event.key == K_LEFT:
                         self.__Paddle.lStop()
