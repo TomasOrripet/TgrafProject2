@@ -9,7 +9,7 @@ import math
 
 class Ball:
 
-    def __init__(self,velocity,):
+    def __init__(self):
         self.amount_of_triangles = 20
         self.radius = 10
         self.x_pos = 70#380
@@ -52,9 +52,16 @@ class Ball:
     
 
     def check_paddle(self, paddleX):
-        if self.y_pos < 60:
-            if self.x_pos < paddleX +80 and self.x_pos > paddleX -80:
-                self.velocity[1] = -self.velocity[1]
+        if self.y_pos < 60 and self.y_pos > 50:
+            if self.x_pos < paddleX  and self.x_pos > paddleX -60 :
+                frommid = paddleX - self.x_pos
+                self.velocity[1] = - self.velocity[1]
+                self.velocity[0] = - frommid/10
+            if self.x_pos > paddleX and self.x_pos < paddleX + 60:
+                frommid = self.x_pos - paddleX 
+                self.velocity[0] = + frommid/10
+                self.velocity[1] = - self.velocity[1]
+
         pass
 
     def check_bricks(self, bricks):

@@ -64,3 +64,5 @@ class paddle():
         if self.__posX < self.__xMin:
             self.__posX = self.__xMin
 
+    
+
